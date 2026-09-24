@@ -1,0 +1,11 @@
+.openai
+.sites-runtime
+.wrangler
+dist
+out
+.next
+.vinext
+.env*
+*.tsbuildinfo
+tests
+vite.config.ts
