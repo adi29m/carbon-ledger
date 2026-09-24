@@ -2,6 +2,24 @@
 
 A responsive CBAM evidence-preparation website for aluminium exporters. This first version is an interactive frontend prototype with six fictional suppliers and clearly marked sample evidence.
 
+[Open the live demo](https://carbon-ledger-self.vercel.app)
+
+## Interface preview
+
+These screenshots show fictional demo data. The application prepares draft evidence; it does not certify CBAM compliance.
+
+**Overview — evidence progress and next steps**
+
+![CarbonLedger overview showing supplier counts, evidence readiness, and next steps](docs/screenshots/overview.png)
+
+**Suppliers — evidence status for each supplier**
+
+![Supplier cards showing reviewed, missing, and pending evidence](docs/screenshots/suppliers.png)
+
+**Documents — the supplier evidence register**
+
+![Document register with supplier, category, and review status columns](docs/screenshots/documents.png)
+
 ## Run locally
 
 Requires Node.js 22.13 or newer.
