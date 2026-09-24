@@ -1,8 +1,8 @@
 # CarbonLedger
 
-A responsive CBAM evidence-preparation website for aluminium exporters. This first version is an interactive frontend prototype with six fictional suppliers and clearly marked sample evidence.
+A responsive CBAM evidence-preparation website for aluminium exporters. The public landing page explains the product, and the interactive workspace prototype uses six fictional suppliers and clearly marked sample evidence.
 
-[Open the live demo](https://carbon-ledger-self.vercel.app)
+[Visit the landing page](https://carbon-ledger-self.vercel.app) · [Open the interactive workspace](https://carbon-ledger-self.vercel.app/workspace)
 
 ## Interface preview
 
@@ -60,12 +60,15 @@ The application does not yet implement accounts, durable storage, OCR/AI extract
 
 ## Structure
 
-- `app/page.tsx`: shared session state, dashboard and navigation.
+- `app/page.tsx` and `app/landing.css`: public product landing page, responsive styling and visual storytelling.
+- `app/workspace/page.tsx`: shared demo session state, dashboard and navigation.
+- `components/landing-motion.tsx`: progressive scroll reveals and mobile navigation behavior.
 - `components/workspace-views.tsx`: suppliers, documents, review dialogs, reports and settings.
 - `lib/workspace.ts`: typed records and sample fixtures.
 - `lib/reports.ts`: evidence checklist and safe draft exports.
 - `lib/use-workspace-tools.ts`: optional WebMCP integration.
 - `app/globals.css`: responsive theme and application styles.
+- `public/images`: optimized, illustrative industrial imagery and workspace previews for the landing page.
 
 Built with React and TypeScript. The local preview uses the original Vinext development setup. Vercel uses a standard Next.js static export through `npm run build:vercel`, configured in `vercel.json`. The legacy Sites identity is retained locally in `.openai/hosting.json` and excluded from Vercel uploads.
 

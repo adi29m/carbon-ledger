@@ -3,8 +3,9 @@ import "./globals.css";
 import "./refinement.css";
 
 export const metadata: Metadata = {
-  title: "CarbonLedger — Your CBAM workspace",
-  description: "Bring supplier evidence, data review, and CBAM report preparation into one clear workspace. An interactive demo for aluminium exporters.",
+  metadataBase: new URL("https://carbon-ledger-self.vercel.app"),
+  title: "CarbonLedger — Evidence, organised",
+  description: "A clear evidence workspace for aluminium exporters preparing CBAM data. Explore supplier records, human review, and draft evidence packs.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
