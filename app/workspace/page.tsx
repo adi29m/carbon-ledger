@@ -26,7 +26,7 @@ function AppNavigation({ view, navigate, pending, company }: { view: View; navig
   const go = (v: View) => { navigate(v); setOpenMobile(false); };
   return <Sidebar className="app-sidebar">
     <SidebarHeader className="brand-header"><a href="#overview" onClick={() => go("overview")} className="brand"><span className="brand-icon"><Leaf size={23} strokeWidth={1.8} /></span>Carbon<span className="brand-light">Ledger</span></a><span className="brand-subtitle">YOUR CBAM WORKSPACE</span></SidebarHeader>
-    <SidebarContent>
+    <SidebarContent className="workspace-sidebar-scroll">
       <button className="workspace-picker" onClick={() => go("settings")}><span className="workspace-avatar">{company.charAt(0)}</span><span><strong>{company}</strong><small>Demo workspace</small></span><Settings2 size={15} /></button>
       <div className="nav-label">WORKSPACE</div>
       <nav aria-label="Main navigation" className="main-navigation">{navigation.map(({ id, label, icon: Icon }) => <button key={id} aria-current={view === id ? "page" : undefined} className={`nav-link ${view === id ? "active" : ""}`} onClick={() => go(id)}><Icon size={19} strokeWidth={1.7} /><span>{label}</span>{id === "review" && pending > 0 && <span className="nav-count">{pending}</span>}</button>)}</nav>

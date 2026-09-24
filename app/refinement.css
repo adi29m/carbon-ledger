@@ -22,6 +22,15 @@ button, a, input, textarea { transition-duration: 180ms; }
 button:focus-visible, a:focus-visible { outline: 3px solid #7e9d62; outline-offset: 4px; }
 .app-main { background: radial-gradient(ellipse at 85% 0, #eaf0df66, transparent 38%), var(--background); }
 .app-sidebar [data-slot=sidebar-inner] { background: radial-gradient(ellipse at 0 0, #2c4e3b80, transparent 65%), linear-gradient(165deg, #15372d, #112a24); }
+.workspace-sidebar-scroll::-webkit-scrollbar { width: 11px; }
+.workspace-sidebar-scroll::-webkit-scrollbar-track { background: #19372e; border-left: 1px solid #ffffff0b; }
+.workspace-sidebar-scroll::-webkit-scrollbar-thumb { min-height: 40px; border: 3px solid #19372e; border-radius: 999px; background: #83a088; }
+.workspace-sidebar-scroll::-webkit-scrollbar-thumb:hover { background: #b1c99d; }
+.workspace-sidebar-scroll::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+.workspace-sidebar-scroll::-webkit-scrollbar-corner { background: #19372e; }
+@supports (-moz-appearance: none) {
+  .workspace-sidebar-scroll { scrollbar-width: thin; scrollbar-color: #83a088 #19372e; }
+}
 .brand-header { padding: 31px 23px 24px!important; gap: 9px!important; }
 .brand { font-size: 24px; letter-spacing: -1.05px; font-weight: 650; }
 .brand-light { font-weight: 350; color: #e7efdf; }
