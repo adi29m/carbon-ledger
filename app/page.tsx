@@ -14,7 +14,6 @@ import {
   FolderOpen,
   Globe2,
   Layers3,
-  Leaf,
   LockKeyhole,
   Menu,
   MoveUpRight,
@@ -91,8 +90,14 @@ const faqs = [
 function Brand({ light = false }: { light?: boolean }) {
   return (
     <Link className={`landing-brand ${light ? "landing-brand-light" : ""}`} href="/" aria-label="CarbonLedger home">
-      <span className="landing-brand-mark"><Leaf size={20} strokeWidth={1.8} /></span>
-      <span>carbon<span>ledger</span></span>
+      <span className="landing-brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 38 38" fill="none">
+          <path d="M9 8.5h14.5L29 14v15.5H9V8.5Z" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M23.5 8.5V14H29M13 21h12M13 25h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <circle cx="13" cy="14" r="2" fill="currentColor" />
+        </svg>
+      </span>
+      <span className="landing-brand-type">carbon<span>ledger</span><small>THE EVIDENCE SYSTEM</small></span>
     </Link>
   );
 }
@@ -110,24 +115,29 @@ export default function LandingPage() {
       <header className="landing-header">
         <div className="landing-header-inner">
           <Brand />
-          <nav className="landing-desktop-nav" aria-label="Main navigation">
-            <a href="#why">Why CarbonLedger</a>
-            <a href="#product">Product</a>
-            <a href="#workflow">How it works</a>
-            <a href="#faq">FAQ</a>
-          </nav>
-          <Link className="landing-header-cta" href="/workspace">Open the demo <ArrowUpRight size={16} /></Link>
+          <div className="landing-header-index">
+            <span className="landing-index-stamp"><span /> CBAM / 2026</span>
+            <nav className="landing-desktop-nav" aria-label="Main navigation">
+              <a href="#why" data-nav-target="why" className="is-active" aria-current="location"><span>01</span> Context</a>
+              <a href="#product" data-nav-target="product"><span>02</span> Platform</a>
+              <a href="#workflow" data-nav-target="workflow"><span>03</span> Process</a>
+              <a href="#faq" data-nav-target="faq"><span>04</span> Notes</a>
+            </nav>
+          </div>
+          <Link className="landing-header-cta" href="/workspace"><span>Enter workspace</span><span className="landing-header-cta-icon"><ArrowUpRight size={18} /></span></Link>
           <details className="landing-mobile-nav">
-            <summary aria-label="Open navigation"><Menu size={22} /></summary>
+            <summary aria-label="Navigation menu"><span>MENU</span><Menu size={20} /></summary>
             <nav aria-label="Mobile navigation">
-              <a href="#why">Why CarbonLedger</a>
-              <a href="#product">Product</a>
-              <a href="#workflow">How it works</a>
-              <a href="#faq">FAQ</a>
-              <Link href="/workspace">Open the demo <ArrowUpRight size={16} /></Link>
+              <span className="landing-mobile-nav-label">THE FIELD INDEX <span>2026 / CBAM</span></span>
+              <a href="#why" data-nav-target="why" aria-label="The challenge"><span>01</span> The challenge <ArrowUpRight size={16} /></a>
+              <a href="#product" data-nav-target="product" aria-label="The workspace"><span>02</span> The workspace <ArrowUpRight size={16} /></a>
+              <a href="#workflow" data-nav-target="workflow" aria-label="How it works"><span>03</span> How it works <ArrowUpRight size={16} /></a>
+              <a href="#faq" data-nav-target="faq" aria-label="Questions"><span>04</span> Questions <ArrowUpRight size={16} /></a>
+              <Link className="landing-mobile-demo" href="/workspace">Enter workspace <ArrowUpRight size={18} /></Link>
             </nav>
           </details>
         </div>
+        <div className="landing-header-progress" aria-hidden="true"><span /></div>
       </header>
 
       <main id="landing-main">
@@ -142,9 +152,20 @@ export default function LandingPage() {
           />
           <div className="landing-hero-overlay" />
           <div className="landing-hero-grid" aria-hidden="true" />
+          <div className="landing-hero-trace" aria-hidden="true">
+            <svg viewBox="0 0 420 280" fill="none">
+              <path className="landing-trace-path" d="M28 216C100 216 106 82 185 82S280 173 392 38" />
+              <circle className="landing-trace-node landing-trace-node-one" cx="28" cy="216" r="5" />
+              <circle className="landing-trace-node landing-trace-node-two" cx="185" cy="82" r="5" />
+              <circle className="landing-trace-node landing-trace-node-three" cx="392" cy="38" r="5" />
+            </svg>
+            <span className="landing-trace-label landing-trace-label-one">01 / SOURCE</span>
+            <span className="landing-trace-label landing-trace-label-two">02 / REVIEW</span>
+            <span className="landing-trace-label landing-trace-label-three">03 / HANDOFF</span>
+          </div>
           <div className="landing-hero-content">
             <span className="landing-kicker landing-hero-kicker"><span className="landing-kicker-dot" /> THE EVIDENCE BEHIND BETTER TRADE</span>
-            <h1 id="hero-title">Every export begins with <em>evidence.</em></h1>
+            <h1 id="hero-title"><span className="landing-headline-line">Every export begins</span><span className="landing-headline-line">with <em>evidence.</em></span></h1>
             <p>Bring scattered supplier records into one clear, reviewable workspace for your CBAM preparation.</p>
             <div className="landing-hero-actions">
               <Link className="landing-button landing-button-lime" href="/workspace">Explore the demo <ArrowUpRight size={19} /></Link>
@@ -153,9 +174,11 @@ export default function LandingPage() {
             <div className="landing-hero-note"><ShieldCheck size={16} /> Built for aluminium exporters and the teams behind them</div>
           </div>
           <div className="landing-hero-float" aria-hidden="true">
-            <div className="landing-hero-float-top"><span className="landing-float-icon"><Layers3 size={19} /></span><span>THE EVIDENCE TRAIL</span><CheckCheck size={18} /></div>
-            <div className="landing-float-lines"><span><i /> Supplier records</span><span><i /> Source documents</span><span><i /> Human review</span></div>
-            <div className="landing-float-bottom"><span>One connected view</span><ArrowUpRight size={16} /></div>
+            <div className="landing-hero-float-inner">
+              <div className="landing-hero-float-top"><span className="landing-float-icon"><Layers3 size={19} /></span><span>THE EVIDENCE TRAIL</span><CheckCheck size={18} /></div>
+              <div className="landing-float-lines"><span><i /> Supplier records</span><span><i /> Source documents</span><span><i /> Human review</span></div>
+              <div className="landing-float-bottom"><span>One connected view</span><ArrowUpRight size={16} /></div>
+            </div>
           </div>
           <div className="landing-hero-bottom">
             <span>01 / 03 &nbsp; SUPPLIER NETWORK</span>
@@ -184,11 +207,11 @@ export default function LandingPage() {
         </section>
 
         <section className="landing-story landing-container" aria-label="Supplier evidence story">
-          <div className="landing-story-photo" data-reveal>
+          <div className="landing-story-photo" data-reveal="photo">
             <Image src="/images/aluminium-production.webp" alt="A worker checks aluminium profiles during production" fill sizes="(max-width: 800px) 100vw, 48vw" />
             <span className="landing-photo-label"><span /> FROM THE FACTORY FLOOR</span>
           </div>
-          <div className="landing-story-card" data-reveal>
+          <div className="landing-story-card" data-reveal="right">
             <div className="landing-story-card-top"><span className="landing-eyebrow">THE WORK BEHIND THE WORK</span><FolderOpen size={23} /></div>
             <h3>One material.<br /><em>Many moving parts.</em></h3>
             <p>Each supplier has its own records, formats, and open questions. CarbonLedger gives your team a place to gather the evidence and see the gaps.</p>
@@ -206,14 +229,14 @@ export default function LandingPage() {
               <div><span className="landing-eyebrow"><span>02</span> THE WORKSPACE</span><h2>Complex process.<br /><em>Clearer picture.</em></h2></div>
               <p>Give your team a shared view of suppliers, source documents, and review progress—without pretending a checklist is a compliance certificate.</p>
             </div>
-            <div className="landing-screen-shell" data-reveal>
+            <div className="landing-screen-shell" data-reveal="depth">
               <div className="landing-screen-bar"><div><i /><i /><i /></div><span>CarbonLedger / Overview</span><span>INTERACTIVE DEMO</span></div>
               <Image src="/images/workspace-overview.webp" alt="CarbonLedger overview showing supplier counts, evidence readiness, and next steps" width={1440} height={900} sizes="(max-width: 1000px) 100vw, 84vw" className="landing-screen-image" />
             </div>
             <div className="landing-product-caption" data-reveal><span><Sparkles size={18} /> MADE FOR THE DETAILS</span><p>One calm place to see what is reviewed and what still needs attention.</p><TextLink href="/workspace">Open the workspace</TextLink></div>
             <div className="landing-screen-grid">
-              <article className="landing-screen-feature" data-reveal><div className="landing-screen-mini"><Image src="/images/workspace-suppliers.webp" alt="Supplier cards with evidence checklists and status" width={1200} height={780} sizes="(max-width: 800px) 100vw, 42vw" /></div><div><span>01 / SUPPLIERS</span><h3>Know where every supplier stands.</h3><p>See evidence status across your network and focus follow-ups where they matter.</p></div></article>
-              <article className="landing-screen-feature" data-reveal><div className="landing-screen-mini"><Image src="/images/workspace-documents.webp" alt="Document register with source files and review status" width={1200} height={780} sizes="(max-width: 800px) 100vw, 42vw" /></div><div><span>02 / DOCUMENTS</span><h3>Keep the source close to the number.</h3><p>Review inputs alongside the file and retain a clear source reference.</p></div></article>
+              <article className="landing-screen-feature" data-reveal="left"><div className="landing-screen-mini"><Image src="/images/workspace-suppliers.webp" alt="Supplier cards with evidence checklists and status" width={1200} height={780} sizes="(max-width: 800px) 100vw, 42vw" /></div><div><span>01 / SUPPLIERS</span><h3>Know where every supplier stands.</h3><p>See evidence status across your network and focus follow-ups where they matter.</p></div></article>
+              <article className="landing-screen-feature" data-reveal="right"><div className="landing-screen-mini"><Image src="/images/workspace-documents.webp" alt="Document register with source files and review status" width={1200} height={780} sizes="(max-width: 800px) 100vw, 42vw" /></div><div><span>02 / DOCUMENTS</span><h3>Keep the source close to the number.</h3><p>Review inputs alongside the file and retain a clear source reference.</p></div></article>
             </div>
           </div>
         </section>

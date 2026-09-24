@@ -7,8 +7,60 @@ export function LandingMotion() {
     const menu = document.querySelector<HTMLDetailsElement>(".landing-mobile-nav");
     const links = Array.from(menu?.querySelectorAll("a") ?? []);
     const closeMenu = () => menu?.removeAttribute("open");
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMenu();
+    };
     links.forEach((link) => link.addEventListener("click", closeMenu));
-    return () => links.forEach((link) => link.removeEventListener("click", closeMenu));
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      links.forEach((link) => link.removeEventListener("click", closeMenu));
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, []);
+
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>(".landing-header");
+    if (!header) return;
+
+    const sections = ["why", "product", "workflow", "faq"]
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    const navLinks = Array.from(header.querySelectorAll<HTMLAnchorElement>("[data-nav-target]"));
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+      header.style.setProperty("--landing-scroll-progress", progress.toString());
+      header.classList.toggle("is-scrolled", window.scrollY > 20);
+
+      let active = sections[0]?.id;
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= window.innerHeight * 0.44) active = section.id;
+      });
+
+      const activeIndex = Math.max(0, sections.findIndex((section) => section.id === active));
+      header.style.setProperty("--landing-active-index", activeIndex.toString());
+      navLinks.forEach((link) => {
+        const isActive = link.dataset.navTarget === active;
+        link.classList.toggle("is-active", isActive);
+        if (isActive) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+    };
+
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, []);
 
   useEffect(() => {
