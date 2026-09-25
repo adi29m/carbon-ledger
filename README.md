@@ -39,6 +39,8 @@ npm run build
 
 If Windows resolves `npm` incorrectly, invoke the installed npm CLI directly with Node. The site otherwise uses the standard project scripts.
 
+For substantial changes, follow the [development quality workflow](AGENTS.md), based on a [pinned Unlazy revision](https://github.com/Leonxlnx/unlazy/tree/16671491f6679ad9378f52604d3bc2415b4120c7). It uses explicit acceptance gates and reviewed checks; it is not included in the production bundle.
+
 ## Implemented
 
 - Overview with live evidence counts, checklist readiness, action links and an explicitly illustrative emissions chart.
