@@ -25,6 +25,10 @@ import {
 import { LandingMotion } from "@/components/landing-motion";
 import "./landing.css";
 
+const savedWorkspaceReady = Boolean(
+  process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+);
+
 export const metadata: Metadata = {
   title: "CarbonLedger — Clarity for every supplier record",
   description:
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-const process = [
+const workflowSteps = [
   {
     number: "01",
     icon: Users,
@@ -124,7 +128,7 @@ export default function LandingPage() {
               <a href="#faq" data-nav-target="faq"><span>04</span> Notes</a>
             </nav>
           </div>
-          <Link className="landing-header-cta" href="/workspace"><span>Enter workspace</span><span className="landing-header-cta-icon"><ArrowUpRight size={18} /></span></Link>
+          <Link className="landing-header-cta" href={savedWorkspaceReady ? "/app" : "/workspace"}><span>{savedWorkspaceReady ? "Sign in" : "Enter workspace"}</span><span className="landing-header-cta-icon"><ArrowUpRight size={18} /></span></Link>
           <details className="landing-mobile-nav">
             <summary aria-label="Navigation menu"><span>MENU</span><Menu size={20} /></summary>
             <nav aria-label="Mobile navigation">
@@ -133,7 +137,7 @@ export default function LandingPage() {
               <a href="#product" data-nav-target="product" aria-label="The workspace"><span>02</span> The workspace <ArrowUpRight size={16} /></a>
               <a href="#workflow" data-nav-target="workflow" aria-label="How it works"><span>03</span> How it works <ArrowUpRight size={16} /></a>
               <a href="#faq" data-nav-target="faq" aria-label="Questions"><span>04</span> Questions <ArrowUpRight size={16} /></a>
-              <Link className="landing-mobile-demo" href="/workspace">Enter workspace <ArrowUpRight size={18} /></Link>
+              <Link className="landing-mobile-demo" href={savedWorkspaceReady ? "/app" : "/workspace"}>{savedWorkspaceReady ? "Sign in" : "Enter workspace"} <ArrowUpRight size={18} /></Link>
             </nav>
           </details>
         </div>
@@ -247,7 +251,7 @@ export default function LandingPage() {
             <p>Simple enough to start today. Structured enough to make the next conversation with your importer or specialist more productive.</p>
           </div>
           <div className="landing-process-grid">
-            {process.map(({ number, icon: Icon, title, description, detail }) => <article className="landing-process-card" key={number} data-reveal>
+            {workflowSteps.map(({ number, icon: Icon, title, description, detail }) => <article className="landing-process-card" key={number} data-reveal>
               <div className="landing-process-top"><span>{number}</span><Icon size={27} strokeWidth={1.4} /></div>
               <h3>{title}</h3><p>{description}</p><div className="landing-process-footer"><span>{detail}</span><ArrowUpRight size={17} /></div>
             </article>)}
@@ -295,7 +299,7 @@ export default function LandingPage() {
       </main>
 
       <footer className="landing-footer">
-        <div className="landing-container landing-footer-main"><div><Brand light /><p>Evidence, organised.<br />Decisions, better informed.</p></div><div className="landing-footer-links"><div><span>EXPLORE</span><a href="#why">Why CarbonLedger</a><a href="#product">Product</a><a href="#workflow">How it works</a></div><div><span>RESOURCES</span><Link href="/workspace">Interactive demo</Link><a href="#faq">FAQ</a><a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener noreferrer">About CBAM <ArrowUpRight size={14} /></a></div></div></div>
+        <div className="landing-container landing-footer-main"><div><Brand light /><p>Evidence, organised.<br />Decisions, better informed.</p></div><div className="landing-footer-links"><div><span>EXPLORE</span><a href="#why">Why CarbonLedger</a><a href="#product">Product</a><a href="#workflow">How it works</a></div><div><span>RESOURCES</span><Link href="/workspace">Interactive demo</Link>{savedWorkspaceReady && <Link href="/app">Saved workspace</Link>}<a href="#faq">FAQ</a><a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener noreferrer">About CBAM <ArrowUpRight size={14} /></a></div></div></div>
         <div className="landing-container landing-footer-bottom"><span>© {new Date().getFullYear()} CarbonLedger</span><span>Demo product. Not a regulatory submission or compliance certification.</span><a href="#landing-main">Back to top ↑</a></div>
       </footer>
     </div>
