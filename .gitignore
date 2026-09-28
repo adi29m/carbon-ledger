@@ -50,3 +50,8 @@ next-env.d.ts
 .vercel
 .env*
 !.env.example
+
+# Local Unlazy execution state and optional hooks.
+/.unlazy/
+/.unlazy-hook-state.json
+/.claude/settings.local.json

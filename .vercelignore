@@ -9,3 +9,8 @@ out
 *.tsbuildinfo
 tests
 vite.config.ts
+.agents
+.codex
+.unlazy
+work
+outputs

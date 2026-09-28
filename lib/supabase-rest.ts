@@ -2,7 +2,8 @@
 // Authorization is enforced by the SQL row-level and object policies, never
 // by trusting role flags from the browser.
 export const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "") ?? "";
-const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? "";
+const publishableKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+  || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 export const supabaseConfigured = Boolean(supabaseUrl && publishableKey);
 const sessionKey = "carbonledger.supabase.session.v1";
 
